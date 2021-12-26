@@ -3,4 +3,5 @@
 .main {
   /* font-family: 'Jost', sans-serif; */
   font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
 }
