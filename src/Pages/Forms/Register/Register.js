@@ -15,12 +15,18 @@ const Login = () => {
     signInWithSocialAccount,
   } = useAuth();
 
+  /* -------------------------------------------------------------------------- */
+  /*                             React Hook Form                             */
+  /* -------------------------------------------------------------------------- */
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
+  /* -------------------------------------------------------------------------- */
+  /*                             SIGN UP/REGISTER WITH EMAIL                             */
+  /* -------------------------------------------------------------------------- */
   const onSubmit = (data) => {
     // console.log(data);
     const userEmail = data.email;

@@ -3,19 +3,67 @@ import { Row, Col, Form } from "react-bootstrap";
 import image from "../../../images/Form/Secure login-bro.svg";
 import "./Login.css";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
+import popupSuccess from "../../../PopUp/popupSuccess";
+import popupError from "../../../PopUp/popupError";
 
 const Login = () => {
-  const { user } = useAuth();
+  const {
+    user,
+    googleProvider,
+    facebookProvider,
+    signInWithEmail,
+    signInWithSocialAccount,
+    resetPassword,
+  } = useAuth();
 
+  /* -------------------------------------------------------------------------- */
+  /*                            Login Page Redirect URL                             */
+  /* -------------------------------------------------------------------------- */
+  const history = useHistory();
+  const location = useLocation();
+  const redirectUrl = location.state?.from || "/home";
+
+  /* -------------------------------------------------------------------------- */
+  /*                             React Hook Form                             */
+  /* -------------------------------------------------------------------------- */
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
-  const onSubmit = (data) => {};
+  /* -------------------------------------------------------------------------- */
+  /*                             SIGN IN WITH EMAIL                             */
+  /* -------------------------------------------------------------------------- */
+  const onSubmit = (data) => {
+    // setUser(data);
+    const userEmail = data.email;
+    const userPassword = data.password;
+    signInWithEmail(userEmail, userPassword)
+      .then((result) => {
+        popupSuccess("login");
+        history.push(redirectUrl);
+      })
+      .catch((err) => {
+        popupError(err.message);
+      });
+  };
+
+  /* -------------------------------------------------------------------------- */
+  /*                         SIGN IN WITH SOCIAL ACCOUNT                        */
+  /* -------------------------------------------------------------------------- */
+  const handleSignInWithSocial = (provider) => {
+    signInWithSocialAccount(provider)
+      .then((result) => {
+        popupSuccess("login");
+        history.push(redirectUrl);
+      })
+      .catch((err) => {
+        popupError(err.message);
+      });
+  };
 
   return (
     <div className="form">
@@ -82,10 +130,16 @@ const Login = () => {
                 Or with Social Profile
               </small>
               <div className="social-btn-box my-3 d-flex justify-content-center align-items-center">
-                <button className="btn-social">
+                <button
+                  className="btn-social"
+                  onClick={() => handleSignInWithSocial(googleProvider)}
+                >
                   <i class="fab fa-google"></i>
                 </button>
-                <button className="btn-social">
+                <button
+                  className="btn-social"
+                  onClick={() => handleSignInWithSocial(facebookProvider)}
+                >
                   <i class="fab fa-facebook"></i>
                 </button>
               </div>

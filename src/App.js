@@ -9,6 +9,8 @@ import Register from "./Pages/Forms/Register/Register";
 import About from "./Pages/About/About";
 import Dentists from "./Pages/Dentists/Dentists";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
+import ServiceDetails from "./Components/ServiceDetails/ServiceDetails";
+import Services from "./Pages/Services/Services";
 
 function App() {
   return (
@@ -27,6 +29,12 @@ function App() {
           </Route>
           <PrivateRoute path="/dentists">
             <Dentists></Dentists>
+          </PrivateRoute>
+          <PrivateRoute path="/services">
+            <Services></Services>
+          </PrivateRoute>
+          <PrivateRoute path="/service/:id">
+            <ServiceDetails></ServiceDetails>
           </PrivateRoute>
           <Route path="/login">
             <Login />
