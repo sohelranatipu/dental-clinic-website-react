@@ -1,4 +1,5 @@
 import React from "react";
+import "./Services.css";
 
 import { Col, Row } from "react-bootstrap";
 import Service from "../../Components/Service/Service";
@@ -8,15 +9,17 @@ const Services = () => {
   const { services } = useServices();
   return (
     <div className="services container">
-      <h4>#Our dental services</h4>
-      <h1 className="text-center mt-3">
-        Enjoy Specialized Care Through{" "}
-        <span>
-          Precision, Artistry, <br /> And Experience
-        </span>{" "}
-        Top
-      </h1>
-      <Row xs={1} md={2} lg={3} className="g-4 mt-3">
+      <div className="service_info">
+        <h4 className="service_title  ">#Our dental services</h4>
+        <h1 className="text-center mt-3 service_title_big">
+          Enjoy Specialized Care Through{" "}
+          <span>
+            Precision, Artistry, <br /> And Experience
+          </span>{" "}
+          Top
+        </h1>
+      </div>
+      <Row xs={1} md={2} lg={3} className="g-4 my-5">
         {services?.map((service) => (
           <Col>
             <Service service={service} key={service.id}></Service>

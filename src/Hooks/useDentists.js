@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
 const useDentists = () => {
-  const [destists, setDetists] = useState([]);
+  const [dentists, setDentists] = useState([]);
 
   useEffect(() => {
     fetch("/Dentists.json")
       .then((res) => res.json())
-      .then((data) => setDetists(data));
+      .then((data) => setDentists(data));
   }, []);
 
-  return destists;
+  return { dentists };
 };
 
 export default useDentists;
