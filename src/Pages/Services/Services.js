@@ -1,7 +1,7 @@
 import React from "react";
 import "./Services.css";
 
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Spinner } from "react-bootstrap";
 import Service from "../../Components/Service/Service";
 import useServices from "../../Hooks/useServices";
 
@@ -20,11 +20,17 @@ const Services = () => {
         </h1>
       </div>
       <Row xs={1} md={2} lg={3} className="g-4 my-5">
-        {services?.map((service) => (
-          <Col>
-            <Service service={service} key={service.id}></Service>
-          </Col>
-        ))}
+        {services.length === 0 ? (
+          <Spinner animation="grow" style={{ margin: "50px auto" }} />
+        ) : (
+          <>
+            {services?.map((service) => (
+              <Col>
+                <Service service={service} key={service.id}></Service>
+              </Col>
+            ))}
+          </>
+        )}
       </Row>
     </div>
   );
